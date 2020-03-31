@@ -16,19 +16,41 @@ const tempArr = [
     onlineStatus: true
   }
 ];
+
+const initialState = {
+  hideBtn: false
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      ...initialState
+    };
 
     this.fetch = this.fetch.bind(this);
   }
 
   fetch() {
     this.props.readPosts();
+    this.exampleMethod_updateState();
+  }
+
+  exampleMethod_updateState() {
+    const { hideBtn } = this.state;
+    this.setState({
+      hideBtn: !hideBtn
+    });
+  }
+
+  //another simple method just for testing purposes
+  exampleMethod_returnsAValue(num) {
+    return num + 1;
   }
 
   render() {
     const { posts } = this.props;
+    const { hideBtn } = this.state;
 
     const configBtn = {
       btnText: 'Get posts',
@@ -39,7 +61,8 @@ class App extends Component {
         <Header />
         <section className='main'>
           <Headline header='Posts' desc='Click me' tempArr={tempArr} />
-          <SharedBtn {...configBtn} />
+
+          {!hideBtn && <SharedBtn {...configBtn} />}
           {posts.length > 0 && (
             <div>
               {posts.map((post, id) => {
