@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import posts from '../reducers/post/postReducer';
+import posts from './post/postReducer';
 
 export default combineReducers({
   posts
